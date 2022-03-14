@@ -323,16 +323,16 @@ contract Strategy is BaseStrategy {
         uint256 balanceIn = IERC20(tokenIn).balanceOf(address(this));
         uint256 tokenInSwapper = token.balanceOf(address(otcSwapper));
 
-        //if there isnt enough in the swapper, adjust what we ask for
+        //if there isn't enough in the swapper, adjust what we ask for
         if (tokenInSwapper < amount) {
             amount = tokenInSwapper;
         }
-        //if we cant afford to provide the tokenin for the amount we want, adjust what we ask for
+        //if we cant afford to provide the tokenIn for the amount we want, adjust what we ask for
         if (balanceIn < amount) {
             amount = balanceIn;
         }
 
-        //if the amount to swap is tiny dont bother
+        //if the amount to swap is tiny don't bother
         if (amount > dustThreshold) {
             otcSwapper.trade(tokenIn, Math.min(amount, tokenInSwapper));
             newBalance = token.balanceOf(address(this));
@@ -401,7 +401,7 @@ contract Strategy is BaseStrategy {
         uint256 woofyInLp = woofy.balanceOf(lpToken);
 
         if(yfiInLp.mul(1_000) < woofyInLp.mul(lpSlippage)  || woofyInLp.mul(1_000) < yfiInLp.mul(lpSlippage)){
-            //if the pool is still imbalanced after the arb dont do anything
+            // If the pool is still imbalanced after the arb dont do anything
             return;
         }
 
