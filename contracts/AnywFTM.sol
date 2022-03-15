@@ -151,7 +151,7 @@ contract Strategy is BaseStrategy {
         return stratName;
     }
 
-    // Balance of boo in strat - should be zero most of the time
+    // Balance of want in strat - should be zero most of the time
     function balanceOfWant() public view returns (uint256) {
         return want.balanceOf(address(this));
     }
