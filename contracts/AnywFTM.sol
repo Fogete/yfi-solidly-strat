@@ -199,9 +199,9 @@ contract Strategy is BaseStrategy {
         // Approve and set up trade factory
         address _tradeFactory = tradeFactory;
 
-        ITradeFactory tf = ITradeFactory(_tradeFactory);
+        ITradeFactory tf = ITradeFactory(_tradeFactory); 
         sex.safeApprove(_tradeFactory, type(uint256).max);
-        tf.enable(address(sex), address(want));
+        tf.enable(address(sex), address(want)); // function enable(address, address) external;
 
         solid.safeApprove(_tradeFactory, type(uint256).max);
         tf.enable(address(solid), address(want));
