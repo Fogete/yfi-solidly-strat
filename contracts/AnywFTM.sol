@@ -346,7 +346,7 @@ contract Strategy is BaseStrategy {
             anyWftmBal = balanceOfAnyWftm();
 
             if (anyWftmBal > 0 && wftmBal > 0) {
-                // Deposit into lp
+                // Create lp by adding liquidity
                 ISolidlyRouter(solidlyRouter).addLiquidity(
                     address(wftm),
                     address(anyWFTM),
@@ -379,7 +379,7 @@ contract Strategy is BaseStrategy {
             1e18
         );
 
-        // 1 lp token is this amount of boo
+        // 1 lp token is this amount of want
         uint256 amountWftmPerLp = amountWftm.add(amountAnyWftm);
 
         uint256 lpTokensWeNeed = amountOfWftmWeWant.mul(1e18).div(
@@ -402,7 +402,7 @@ contract Strategy is BaseStrategy {
 
         uint256 balanceOfWftm = balanceOfWant();
 
-        // If we need more boo than is already loose in the contract.
+        // If we need more wftm than is already loose in the contract.
         if (balanceOfWftm < _amountNeeded) {
             // wftm needed beyond any boo that is already loose in the contract.
             uint256 amountToFree = _amountNeeded.sub(balanceOfWftm);
@@ -503,7 +503,7 @@ contract Strategy is BaseStrategy {
         uint256 anyWftmBalance = balanceOfAnyWftm();
 
         if (anyWftmBalance > 0) {
-            // Send our total balance of xboo to the new strategy.
+            // Send our total balance of anyWftm to the new strategy.
             anyWFTM.transfer(_newStrategy, anyWftmBalance);
         }
     }
